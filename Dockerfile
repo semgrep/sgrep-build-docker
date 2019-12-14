@@ -16,4 +16,4 @@ RUN git pull && \
 WORKDIR /home/opam/
 RUN wget https://github.com/aryx/pfff/archive/0.39.4.tar.gz -O pfff.tgz
 RUN mkdir pfff; tar xvfz pfff.tgz -C pfff --strip-components 1
-RUN eval $(opam env); cd pfff; ./configure -novisual; make depend && make && make test
+RUN eval $(opam env); cd pfff; ./configure -novisual; make depend

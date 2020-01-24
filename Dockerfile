@@ -10,4 +10,4 @@ WORKDIR /home/opam/opam-repository
 # the ocaml-migrate-parsetree is a temporary fix for an issue in OPAM
 # see https://github.com/ocaml/opam-repository/issues/15281
 RUN git pull && opam update && opam switch 4.07 && \
-  opam install ocaml-migrate-parsetree ocaml-migrate-parsetree.1.3.1 yaml pfff
+  opam install ocamlfind camlp4 num ocamlgraph json-wheel conf-perl dune yaml

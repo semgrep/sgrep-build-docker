@@ -1,7 +1,7 @@
 FROM ocaml/opam2:debian-stable
 USER root
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends m4 perl wget swi-prolog mercurial pkg-config python3 python3-pip python3-setuptools \
+  && apt-get install -y --no-install-recommends make m4 perl wget swi-prolog mercurial pkg-config python3 python3-pip python3-setuptools \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

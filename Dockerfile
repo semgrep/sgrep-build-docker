@@ -1,4 +1,4 @@
-from ocaml/opam2:ubuntu-16.04
+from ocaml/opam2:ubuntu-18.04
 USER root
 
 # Install a new enough git

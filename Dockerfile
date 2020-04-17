@@ -1,18 +1,20 @@
-FROM ocaml/opam2:debian-stable
+from ocaml/opam2:ubuntu-16.04
 USER root
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends make m4 perl wget swi-prolog mercurial pkg-config python3 python3-pip python3-dev build-essential python3-setuptools \
+
+# Install a new enough git
+RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+  make m4 perl wget swi-prolog mercurial pkg-config build-essential \
+  libcurl4-openssl-dev libexpat1-dev gettext libz-dev libssl-dev build-essential autoconf \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+WORKDIR /usr/src
+RUN sudo wget https://github.com/git/git/archive/v2.18.0.tar.gz -O git.tar.gz;
+RUN sudo tar -xf git.tar.gz;
+WORKDIR git-2.18.0
+RUN sudo make prefix=/usr/local all
+RUN sudo make prefix=/usr/local install
 
-USER opam
-
-ENV PATH="$HOME/.local/bin:$PATH"
-
-RUN pip3 install wheel
-
-WORKDIR /home/opam/opam-repository
-# the ocaml-migrate-parsetree is a temporary fix for an issue in OPAM
-# see https://github.com/ocaml/opam-repository/issues/15281
-RUN git pull && opam update && opam switch 4.07 && \
-  opam install ocamlfind camlp4 num ocamlgraph json-wheel conf-perl dune yaml
+# Install Python 3.7
+WORKDIR /tmp
+COPY ./install-python.sh install-python.sh
+RUN ./install-python.sh

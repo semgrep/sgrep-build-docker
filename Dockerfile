@@ -18,3 +18,4 @@ RUN sudo make prefix=/usr/local install
 WORKDIR /tmp
 COPY ./install-python.sh install-python.sh
 RUN ./install-python.sh
+RUN echo "OK."
